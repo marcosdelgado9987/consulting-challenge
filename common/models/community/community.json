@@ -1,0 +1,230 @@
+{
+  "name": "COMMUNITY",
+  "plural": "community",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "validation": [],
+  "properties": {
+    "addressCity": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDRESS_CITY"
+      }
+    },
+    "addressLine1": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDRESS_LINE_1"
+      }
+    },
+    "addressLine2": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDRESS_LINE_2"
+      }
+    },
+    "addressLine3": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDRESS_LINE_3"
+      }
+    },
+    "addressLine4": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDRESS_LINE_4"
+      }
+    },
+    "addressNumber": {
+      "type": "number",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDRESS_NUMBER"
+      }
+    },
+    "addressState": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDRESS_STATE"
+      }
+    },
+    "addescription": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "AD_DESCRIPTION"
+      }
+    },
+    "area": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "AREA"
+      }
+    },
+    "areaId": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "AREA_ID"
+      }
+    },
+    "companyCode": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "COMPANY_CODE"
+      }
+    },
+    "createdAtTime": {
+      "type": "number",
+      "required": false,
+      "dashdb": {
+        "columnName": "CREATED_AT_TIME"
+      }
+    },
+    "createdByUser": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "CREATED_BY_USER"
+      }
+    },
+    "createdOnDate": {
+      "type": "date",
+      "required": false,
+      "dashdb": {
+        "columnName": "CREATED_ON_DATE"
+      }
+    },
+    "createdViaWorkstation": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "CREATED_VIA_WORKSTATION"
+      }
+    },
+    "createdWithProgram": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "CREATED_WITH_PROGRAM"
+      }
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "DESCRIPTION"
+      }
+    },
+    "id": {
+      "type": "string",
+      "id": 1,
+      "required": true,
+      "dashdb": {
+        "columnName": "ID"
+      }
+    },
+    "phase": {
+      "type": "string",
+      "id": 2,
+      "required": true,
+      "dashdb": {
+        "columnName": "PHASE"
+      }
+    },
+    "phaseEnabled": {
+      "type": "string",
+      "dashdb": {
+        "columnName": "PHASE_ENABLED"
+      }
+    },
+    "neighborhoodStatus": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "NEIGHBORHOOD_STATUS"
+      }
+    },
+    "planMasterProductType": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "PLAN_MASTER_PRODUCT_TYPE"
+      }
+    },
+    "postalCode": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "POSTAL_CODE"
+      }
+    },
+    "communityType": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "COMMUNITY_TYPE"
+      }
+    },
+    "updatedAtTime": {
+      "type": "number",
+      "required": false,
+      "dashdb": {
+        "columnName": "UPDATED_AT_TIME"
+      }
+    },
+    "updatedByUser": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "UPDATED_BY_USER"
+      }
+    },
+    "updatedOnDate": {
+      "type": "date",
+      "required": false,
+      "dashdb": {
+        "columnName": "UPDATED_ON_DATE"
+      }
+    },
+    "updatedViaWorkstation": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "UPDATED_VIA_WORKSTATION"
+      }
+    },
+    "updatedWithProgram": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "UPDATED_WITH_PROGRAM"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "mixins": {
+    "Trim":true
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

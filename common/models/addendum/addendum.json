@@ -1,0 +1,158 @@
+{
+  "name": "ADDENDUM",
+  "plural": "addendum",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "validation": [],
+  "properties": {
+    "addendumExpirationDate": {
+      "type": "date",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDENDUM_EXPIRATION_DATE"
+      }
+    },
+    "addendumFinalDate": {
+      "type": "date",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDENDUM_FINAL_DATE"
+      }
+    },
+    "addendumLockDate": {
+      "type": "date",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDENDUM_LOCK_DATE"
+      }
+    },
+    "addendumNumber": {
+      "type": "number",
+      "id": 2,
+      "required": true,
+      "dashdb": {
+        "columnName": "ADDENDUM_NUMBER"
+      }
+    },
+    "addendumStatus": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDENDUM_STATUS"
+      }
+    },
+    "addendumType": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "ADDENDUM_TYPE"
+      }
+    },
+    "contractId": {
+      "type": "string",
+      "id": 1,
+      "required": true,
+      "dashdb": {
+        "columnName": "CONTRACT_ID"
+      }
+    },
+    "createdAtTime": {
+      "type": "number",
+      "required": false,
+      "dashdb": {
+        "columnName": "CREATED_AT_TIME"
+      }
+    },
+    "createdByUser": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "CREATED_BY_USER"
+      }
+    },
+    "createdOnDate": {
+      "type": "date",
+      "required": false,
+      "dashdb": {
+        "columnName": "CREATED_ON_DATE"
+      }
+    },
+    "createdViaWorkstation": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "CREATED_VIA_WORKSTATION"
+      }
+    },
+    "createdWithProgram": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "CREATED_WITH_PROGRAM"
+      }
+    },
+    "envelopeId": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "ENVELOPE_ID"
+      }
+    },
+    "envelopeStatus": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "ENVELOPE_STATUS"
+      }
+    },
+    "generalNotes": {
+      "type": "string",
+      "required": false,
+      "dashdb": {
+        "columnName": "GENERAL_NOTES"
+      }
+    },
+    "optionSelectionLineCount": {
+      "type": "number",
+      "required": false,
+      "dashdb": {
+        "columnName": "OPTION_SELECTION_LINE_COUNT"
+      }
+    },
+    "totalAmount": {
+      "type": "number",
+      "required": false,
+      "dashdb": {
+        "columnName": "TOTAL_AMOUNT"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "contract": {
+      "type": "belongsTo",
+      "model": "CONTRACT",
+      "foreignKey": "contractId"
+    },
+    "manageContractView": {
+      "type": "belongsTo",
+      "model": "MANAGECONTRACTVIEW",
+      "foreignKey": "contractId"
+    }
+  },
+  "mixins": {
+    "Trim":true
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/common/models/community",
+      "loopback/common/models/addendum",
+      "loopback/server/models",
+      "../common/models/community",
+      "../common/models/addendum",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "COMMUNITY": {
+    "dataSource": "dashDB",
+    "public": true
+  },
+  "ADDENDUM": {
+    "dataSource": "dashDB",
+    "public": true
+  }
+}
