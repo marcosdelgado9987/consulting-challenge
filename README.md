@@ -16,7 +16,7 @@ After analyzing the existing project, your main objective is to:
 
 2. **Identify Outdated Libraries**: Check the `package.json` file for any outdated libraries or scripts being used in the project. Note down these dependencies and consider how updating them might affect the project.
 
-3. **Make Quick Code Updates/Upgrades**: Focus on making quick code updates to improve the project. This may include fixing bugs, optimizing code, updating dependencies, or refactoring code for better maintainability.
+3. **Make Quick Code Updates/Upgrades**: Enhance the project by implementing a series of code updates. This may include fixing bugs, optimizing code, updating dependencies, or refactoring code for better maintainability. Prioritize improvements for the `server.js` file, and/or the two models located in the `/common/models/` directory.
 
 4. **Document Changes**: Provide documentation outlining the changes you made, including any updates to the code, dependencies, or configuration files.
 
