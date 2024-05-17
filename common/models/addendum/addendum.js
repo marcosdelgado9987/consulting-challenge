@@ -4,7 +4,7 @@ const moment = require('moment');
 const rp = require('request-promise');
 
 if(!('VCAP_SERVICES' in process.env))
-  require('dotenv').config({path: process.env.ENVPATH});
+  require('.env').config({path: process.env.ENVPATH});
 var vcap = JSON.parse(process.env.VCAP_SERVICES);
 
 module.exports = (Addendum) => {

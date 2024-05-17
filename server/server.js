@@ -39,6 +39,7 @@ const basicAuth = (req, res, next) => {
     });
   } else {
     const user = basicAuthParser(req);
+    // This is fine for a challenge but I would not hardcode these values. Also, I saving passwords is not recommended. Instead use hashes if needed so.
     const validUser = user && user.name === 'Consulting' && user.pass === 'Ch@lleng3';
 
     if (!validUser) {
@@ -56,6 +57,17 @@ app.start = () => app.listen(() => {
     const explorerPath = app.get('loopback-component-explorer').mountPath;
     console.log('Browse your REST API at %s%s', baseUrl, explorerPath); // eslint-disable-line no-console
   }
+});
+
+app.use(function audit_middleware (err, req, res, next){
+  // An auditing function that will send/store audit logs
+  // For sake of example we are just logging the information for now
+  // We can implement a logger as well
+  function some_auditing_function (req, res, undefined, err) {
+    console.log(req, res, undefined, err);
+  }
+  some_auditing_function(req, res, undefined, err);
+  next();
 });
 
 app.use(basicAuth);
@@ -76,7 +88,22 @@ app.get(`/healthcheck`,
   }
 );
 
-// Bootstrap the application, configure models, datasources and middleware.
+// Generic error handler
+app.use(async function (err, req, res, next) {
+  err.status = err.status || err.statusCode || 500;
+  res.err = err;
+  const out = api_error({
+    status: err.status,
+    message: err.message,
+  });
+  res.status(out.status).json({
+    ...out,
+    ...((err.errors && { errors: err.errors }) || {})
+  });
+});
+
+
+// Bootstrap the application, configure models, data sources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
 boot(app, __dirname, (err) => {
   if (err) throw err;

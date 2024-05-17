@@ -2,54 +2,77 @@ const _ = require('lodash');
 
 module.exports = {
   loadDataSources: (app) => {
-    const vcap = JSON.parse(process.env.VCAP_SERVICES);
-    const cloudantIndex = _.findIndex(vcap['user-provided'], x => /cloudant/gi.test(x.name));
-    const cloudant = vcap['user-provided'][cloudantIndex].credentials;
-    const dashDBIndex = _.findIndex(vcap['user-provided'], x => /dashDB/gi.test(x.name));
-    const dashDB = vcap['user-provided'][dashDBIndex].credentials;
+    // Error handling for VCAP_SERVICES absence
+    console.log(process.env.VCAP_SERVICES);
+    if (!process.env.VCAP_SERVICES) 
+      throw new Error('VCAP_SERVICES environment variable is not set!');
 
+    const vcap = JSON.parse(process.env.VCAP_SERVICES);
+
+    const userProvidedServices = vcap['user-provided'] || []; // Handle missing service group
+
+    // Find Cloudant and dashDB services using more robust filtering
+    const cloudant = userProvidedServices.find(
+      (service) => service.name.toLowerCase().includes('cloudant')
+    );
+
+    const dashDB = userProvidedServices.find(
+      (service) => service.name.toLowerCase().includes('dashdb')
+    );
+
+    // Error handling for missing services
+    if (!cloudant) {
+      throw new Error('Cloudant service not found in VCAP_SERVICES!');
+    }
+
+    if (!dashDB) {
+      throw new Error('dashDB service not found in VCAP_SERVICES!');
+    }
+
+    const cloudantCredentials = cloudant.credentials;
+    const dashDBCredentials = dashDB.credentials;
+
+    // Data source configuration with potential improvements
     app.dataSource('dashDB', {
-      minPoolSize: dashDB.minPoolSize,
-      maxPoolSize: dashDB.maxPoolSize,
-      idleTimeout: dashDB.idleTimeout,
-      connectionTimeout: dashDB.connectionTimeout,
-      autoCleanIdle: dashDB.autoCleanIdle,
-      dsn: dashDB.ssldsn,
+      minPoolSize: _.get(dashDBCredentials, 'minPoolSize'), // Use lodash.get for safer property access
+      maxPoolSize: _.get(dashDBCredentials, 'maxPoolSize'),
+      idleTimeout: _.get(dashDBCredentials, 'idleTimeout'),
+      connectionTimeout: _.get(dashDBCredentials, 'connectionTimeout'),
+      autoCleanIdle: _.get(dashDBCredentials, 'autoCleanIdle'),
+      dsn: dashDBCredentials.ssldsn, // Assuming ssldsn is the correct property
       connector: 'dashdb',
     });
 
-    // Previous sessions
     app.dataSource('sessionDB', {
-      url: cloudant.url,
+      url: cloudantCredentials.url,
       database: 'previous_sessions',
-      username: cloudant.username,
-      password: cloudant.password,
+      username: cloudantCredentials.username,
+      password: cloudantCredentials.password,
       name: 'sessionDB',
       modelIndex: 'lb_key',
       connector: 'cloudant',
     });
 
-    // Previous sessions
     app.dataSource('geoDB', {
-      url: cloudant.url,
+      url: cloudantCredentials.url, // Assuming same Cloudant instance for all data sources
       database: 'geo_lots',
-      username: cloudant.username,
-      password: cloudant.password,
+      username: cloudantCredentials.username,
+      password: cloudantCredentials.password,
       name: 'geoDB',
-      connector: 'cloudant',
       modelIndex: 'lb_key',
+      connector: 'cloudant',
     });
 
-    // Previous sessions
     app.dataSource('planDB', {
-      url: cloudant.url,
+      url: cloudantCredentials.url, // Assuming same Cloudant instance for all data sources
       database: 'plan_collateral',
-      username: cloudant.username,
-      password: cloudant.password,
+      username: cloudantCredentials.username,
+      password: cloudantCredentials.password,
       name: 'planDB',
       modelIndex: 'lb_key',
       connector: 'cloudant',
     });
+
     return app;
   },
 };
